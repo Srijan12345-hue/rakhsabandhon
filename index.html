@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raksha Bandhaan - Digital Rakhi Celebration Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-heart"></i>
+                <span>Raksha Bandhaan</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#virtual-rakhi" class="nav-link">Virtual Rakhi</a></li>
+                <li><a href="#marketplace" class="nav-link">Marketplace</a></li>
+                <li><a href="#stories" class="nav-link">Stories</a></li>
+                <li><a href="#wish-wall" class="nav-link">Wish Wall</a></li>
+                <li><a href="#cultural" class="nav-link">Cultural Corner</a></li>
+                <li><a href="#charity" class="nav-link">Charity</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-image">
+            <img src="https://astrologykart.com/assets/img/post/raksha-bandhan-2025-when-is-rakhi-rituals-and-significance_821566944221.jpg" alt="Raksha Bandhaan Celebration" class="hero-bg-image">
+        </div>
+        <div class="hero-content">
+            <h1>Celebrate Raksha Bandhaan Digitally</h1>
+            <p>Connect hearts across distances with our comprehensive digital Rakhi platform</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="showSection('virtual-rakhi')">Send Virtual Rakhi</button>
+                <button class="btn-secondary" onclick="showSection('marketplace')">Shop Gifts</button>
+            </div>
+        </div>
+        <div class="hero-animation">
+            <div class="floating-rakhi">🎀</div>
+            <div class="floating-heart">💖</div>
+            <div class="floating-gift">🎁</div>
+        </div>
+    </section>
+
+    <!-- Virtual Rakhi Exchange -->
+    <section id="virtual-rakhi" class="section">
+        <div class="container">
+            <h2 class="section-title">Virtual Rakhi Exchange</h2>
+            <div class="rakhi-creator">
+                <div class="rakhi-preview">
+                    <div class="rakhi-design" id="rakhiPreview">
+                        <div class="rakhi-center"></div>
+                        <div class="rakhi-threads"></div>
+                    </div>
+                </div>
+                <div class="rakhi-customizer">
+                    <h3>Customize Your Rakhi</h3>
+                    <div class="customizer-group">
+                        <label>Rakhi Style:</label>
+                        <select id="rakhiStyle" onchange="updateRakhiPreview()">
+                            <option value="traditional">Traditional</option>
+                            <option value="modern">Modern</option>
+                            <option value="floral">Floral</option>
+                            <option value="jeweled">Jeweled</option>
+                        </select>
+                    </div>
+                    <div class="customizer-group">
+                        <label>Color Theme:</label>
+                        <div class="color-picker">
+                            <div class="color-option" data-color="red" onclick="changeRakhiColor('red')"></div>
+                            <div class="color-option" data-color="gold" onclick="changeRakhiColor('gold')"></div>
+                            <div class="color-option" data-color="blue" onclick="changeRakhiColor('blue')"></div>
+                            <div class="color-option" data-color="pink" onclick="changeRakhiColor('pink')"></div>
+                            <div class="color-option" data-color="green" onclick="changeRakhiColor('green')"></div>
+                        </div>
+                    </div>
+                    <div class="customizer-group">
+                        <label>Personal Message:</label>
+                        <textarea id="rakhiMessage" placeholder="Write a heartfelt message for your brother..."></textarea>
+                    </div>
+                    <div class="customizer-group">
+                        <label>Add Photo:</label>
+                        <input type="file" id="rakhiPhoto" accept="image/*" onchange="addPhotoToRakhi()">
+                    </div>
+                    <button class="btn-primary" onclick="sendVirtualRakhi()">Send Virtual Rakhi</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gift Marketplace -->
+    <section id="marketplace" class="section">
+        <div class="container">
+            <h2 class="section-title">Gift Marketplace</h2>
+            <div class="marketplace-filters">
+                <button class="filter-btn active" onclick="filterProducts('all')">All</button>
+                <button class="filter-btn" onclick="filterProducts('rakhis')">Rakhis</button>
+                <button class="filter-btn" onclick="filterProducts('sweets')">Sweets</button>
+                <button class="filter-btn" onclick="filterProducts('hampers')">Hampers</button>
+                <button class="filter-btn" onclick="filterProducts('personalized')">Personalized</button>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Raksha Stories -->
+    <section id="stories" class="section">
+        <div class="container">
+            <h2 class="section-title">Raksha Stories</h2>
+            <div class="stories-header">
+                <button class="btn-primary" onclick="openStoryModal()">Share Your Story</button>
+            </div>
+            <div class="stories-grid" id="storiesGrid">
+                <!-- Stories will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Wish Wall -->
+    <section id="wish-wall" class="section">
+        <div class="container">
+            <h2 class="section-title">Video Wish Wall</h2>
+            <div class="wish-wall-controls">
+                <button class="btn-primary" onclick="recordVideo()"><i class="fas fa-video"></i> Record Video</button>
+                <button class="btn-secondary" onclick="uploadVideo()"><i class="fas fa-upload"></i> Upload Video</button>
+                <div class="privacy-toggle">
+                    <label>
+                        <input type="checkbox" id="publicWish"> Make Public
+                    </label>
+                </div>
+            </div>
+            <div class="video-wall" id="videoWall">
+                <!-- Videos will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cultural Corner -->
+    <section id="cultural" class="section">
+        <div class="container">
+            <h2 class="section-title">Cultural Corner</h2>
+            <div class="cultural-content">
+                <div class="cultural-tabs">
+                    <button class="tab-btn active" onclick="showCulturalTab('history')">History</button>
+                    <button class="tab-btn" onclick="showCulturalTab('customs')">Regional Customs</button>
+                    <button class="tab-btn" onclick="showCulturalTab('facts')">Fun Facts</button>
+                </div>
+                <div class="cultural-tab-content" id="culturalContent">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- E-Card Generator -->
+    <section id="ecard" class="section">
+        <div class="container">
+            <h2 class="section-title">E-Card Generator</h2>
+            <div class="ecard-generator">
+                <div class="ecard-preview">
+                    <div class="ecard-canvas" id="ecardCanvas">
+                        <div class="ecard-content">
+                            <h3 id="ecardTitle">Happy Raksha Bandhaan!</h3>
+                            <p id="ecardMessage">Wishing you love and protection always</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ecard-controls">
+                    <div class="control-group">
+                        <label>Template:</label>
+                        <select id="ecardTemplate" onchange="changeEcardTemplate()">
+                            <option value="classic">Classic</option>
+                            <option value="modern">Modern</option>
+                            <option value="floral">Floral</option>
+                            <option value="elegant">Elegant</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Title:</label>
+                        <input type="text" id="ecardTitleInput" value="Happy Raksha Bandhaan!" onchange="updateEcard()">
+                    </div>
+                    <div class="control-group">
+                        <label>Message:</label>
+                        <textarea id="ecardMessageInput" onchange="updateEcard()">Wishing you love and protection always</textarea>
+                    </div>
+                    <button class="btn-primary" onclick="downloadEcard()">Download E-Card</button>
+                    <button class="btn-secondary" onclick="shareEcard()">Share E-Card</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Charity Section -->
+    <section id="charity" class="section">
+        <div class="container">
+            <h2 class="section-title">Spread Love Through Charity</h2>
+            <div class="charity-options">
+                <div class="charity-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Sponsor Rakhis</h3>
+                    <p>Help underprivileged children celebrate Raksha Bandhaan</p>
+                    <button class="btn-primary" onclick="sponsorRakhis()">Sponsor Now</button>
+                </div>
+                <div class="charity-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Donate to Children</h3>
+                    <p>Support children's charities in the spirit of protection</p>
+                    <button class="btn-primary" onclick="donateToCharity()">Donate Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery Scheduler Modal -->
+    <div id="deliveryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('deliveryModal')">&times;</span>
+            <h3>Schedule Delivery</h3>
+            <form id="deliveryForm">
+                <div class="form-group">
+                    <label>Recipient Name:</label>
+                    <input type="text" id="recipientName" required>
+                </div>
+                <div class="form-group">
+                    <label>Delivery Address:</label>
+                    <textarea id="deliveryAddress" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Delivery Date:</label>
+                    <input type="date" id="deliveryDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Special Instructions:</label>
+                    <textarea id="specialInstructions"></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Schedule Delivery</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Story Modal -->
+    <div id="storyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('storyModal')">&times;</span>
+            <h3>Share Your Raksha Story</h3>
+            <form id="storyForm">
+                <div class="form-group">
+                    <label>Story Title:</label>
+                    <input type="text" id="storyTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Story:</label>
+                    <textarea id="storyContent" required placeholder="Share your beautiful brother-sister memories..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Upload Photos:</label>
+                    <input type="file" id="storyPhotos" multiple accept="image/*">
+                </div>
+                <button type="submit" class="btn-primary">Share Story</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Raksha Bandhaan</h4>
+                    <p>Connecting hearts across distances</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><a href="#virtual-rakhi">Virtual Rakhi</a></li>
+                        <li><a href="#marketplace">Marketplace</a></li>
+                        <li><a href="#stories">Stories</a></li>
+                        <li><a href="#wish-wall">Wish Wall</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Raksha Bandhaan. Made with ❤️ for siblings everywhere.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
